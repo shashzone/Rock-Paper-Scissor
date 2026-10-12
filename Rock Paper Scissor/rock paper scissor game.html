@@ -18,9 +18,22 @@
             gameResult('Scissor')">
         SCISSOR
     </button>
+    <button onclick="
+            nums.Lost = 0
+            nums.Won = 0
+            nums.Tie = 0;
+            alert('The score has been reset!')">
+        RESET SCORE
+    </button>
     
 </body>
 <script>
+    let nums = {
+            Won : 0,
+            Lost : 0,
+            Tie : 0
+        }
+
     function computerMove() {
         const value = Math.random()
         cMove = ''
@@ -42,31 +55,42 @@
 
         if (playerMove === 'Rock') {
             if (cMove === 'Rock') {
-                result = 'Tie'
+                result = 'Tie';
+                nums.Tie ++;
             } else if (cMove === 'Paper') {
-                result = 'Computer Won'
+                result = 'Computer Won';
+                nums.Lost ++;
             } else {
-                result = 'You Won'
+                result = 'You Won';
+                nums.Won ++;
             }
         } else if (playerMove === 'Paper') {
             if (cMove === 'Rock') {
-                result = 'You Won'
+                result = 'You Won';
+                nums.Won ++;
             } else if (cMove === 'Paper') {
-                result = 'Tie'
+                result = 'Tie';
+                nums.Tie ++;
             } else {
-                result = 'Computer Won'
+                result = 'Computer Won';
+                nums.Lost ++;
             }
         } else {
             if (cMove === 'Rock') {
-                result = 'Computer Won'
+                result = 'Computer Won';
+                nums.Lost ++;
             } else if (cMove === 'Paper') {
-                result = 'You Won'
+                result = 'You Won';
+                nums.Won ++;
             } else {
-                result = 'Tie'
+                result = 'Tie';
+                nums.Tie ++;
             }
         }
 
-        alert(`The Computer chose ${cMove} and You chose ${playerMove}, the result is ${result}!`)
+        alert(`The Computer chose ${cMove} and You chose ${playerMove}, the result is ${result}!
+        Won : ${nums.Won}, Lost : ${nums.Lost}, Tie : ${nums.Tie}`)
+        
     }
 </script>
 </html>
