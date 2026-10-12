@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameRPS</title>
+</head>
+<body>
+    <button onclick="
+            gameResult('Rock')">
+        ROCK
+    </button>
+    <button onclick="
+            gameResult('Paper')">
+        PAPER
+    </button>
+    <button onclick="
+            gameResult('Scissor')">
+        SCISSOR
+    </button>
+    
+</body>
+<script>
+    function computerMove() {
+        const value = Math.random()
+        cMove = ''
+
+        if (value >= 0 && value < 1/3) {
+            cMove = 'Rock'
+        } else if (value >= 1/3 && value < 2/3) {
+            cMove = 'Paper'
+        } else {
+            cMove = 'Scissor'
+        }
+
+        return cMove
+    }
+
+    function gameResult(playerMove) {
+        let cMove = computerMove()
+        result= ''
+
+        if (playerMove === 'Rock') {
+            if (cMove === 'Rock') {
+                result = 'Tie'
+            } else if (cMove === 'Paper') {
+                result = 'Computer Won'
+            } else {
+                result = 'You Won'
+            }
+        } else if (playerMove === 'Paper') {
+            if (cMove === 'Rock') {
+                result = 'You Won'
+            } else if (cMove === 'Paper') {
+                result = 'Tie'
+            } else {
+                result = 'Computer Won'
+            }
+        } else {
+            if (cMove === 'Rock') {
+                result = 'Computer Won'
+            } else if (cMove === 'Paper') {
+                result = 'You Won'
+            } else {
+                result = 'Tie'
+            }
+        }
+
+        alert(`The Computer chose ${cMove} and You chose ${playerMove}, the result is ${result}!`)
+    }
+</script>
+</html>
