@@ -18,15 +18,7 @@ A simple and interactive **Rock Paper Scissors game** built using HTML, CSS, and
 
 ## How to Play
 
-1. Open the game in your browser.
-2. Click **Rock**, **Paper**, or **Scissors** to make your move.
-3. The computer randomly selects its move.
-4. The game displays the result of the round:
-   - **Win:** The player wins the round.
-   - **Loss:** The computer wins the round.
-   - **Tie:** Both choose the same move.
-5. Check the score counter to track your performance.
-6. Click **Reset Counter** to reset wins, losses, and ties to zero.
+Go to : [Game Link](https://shashzone.github.io/Rock-Paper-Scissor/Rock%20Paper%20Scissor/)
 
 ## Game Rules
 
