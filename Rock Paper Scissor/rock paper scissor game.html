@@ -3,94 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameRPS</title>
+    <title>Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Isometra&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        .title{
+            justify-content: center;
+        }
+
+        .title-text{
+            color: white;
+            font-family: "Montserrat", sans-serif;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .scissor{
+            background-color: black;
+            height: 150px;
+            width: 150px;
+            display: inline-flex;
+            margin-top: 100px;
+            border-radius: 150px;
+            justify-content: center;
+        }
+
+        .scissor-img{
+            width: 100px;
+            object-fit: contain;
+        }
+
+        .rock{
+            background-color: black;
+            height: 150px;
+            width: 150px;
+            display: inline-flex;
+            margin-top: 100px;
+            margin-left: 50px;
+            border-radius: 150px;
+            justify-content: center;
+        }
+
+        .rock-img{
+            width: 100px;
+            object-fit: contain;
+        }
+
+        .paper{
+            background-color: black;
+            height: 150px;
+            width: 150px;
+            display: inline-flex;
+            margin-top: 100px;
+            margin-left: 50px;
+            border-radius: 150px;
+            justify-content: center;
+        }
+
+        .paper-img{
+            width: 100px;
+            object-fit: contain;
+        }
+
+        .result-text{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 40px;
+            color: yellow;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .user-choice{
+            width: 50px;
+        }
+
+        .computer-choice{
+            width: 50px;
+        }
+
+        .choices{
+            margin-bottom: 50px;
+            color: brown;
+            font-size: 20px;
+        }
+
+        .History{
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .Reset{
+            height: 30px;
+            width: 15%;
+            font-size: medium;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+    </style>
 </head>
-<body>
-    <button onclick="
-            gameResult('Rock')">
-        ROCK
+<body style="background-color: black;">
+
+    <div class="title">
+        <h1 class="title-text">
+            ROCK PAPER SCISSOR GAME
+        </h1>
+    </div>
+
+    <button class="scissor" onclick="wonOrLose('Scissor')">
+        <img class="scissor-img" src="scissors-emoji.png" alt="">
     </button>
-    <button onclick="
-            gameResult('Paper')">
-        PAPER
+    
+    <button class="rock" onclick="wonOrLose('Rock')">
+        <img class="rock-img" src="rock-emoji.png" alt="">
     </button>
-    <button onclick="
-            gameResult('Scissor')">
-        SCISSOR
+
+    <button class="paper" onclick="wonOrLose('Paper')">
+        <img class="paper-img" src="paper-emoji.png" alt="">
     </button>
-    <button onclick="
-            nums.Lost = 0
-            nums.Won = 0
-            nums.Tie = 0;
-            alert('The score has been reset!')">
-        RESET SCORE
+
+
+    <div class="result">
+        <div class="result-text">
+
+        </div>
+        <div class="choices">
+            
+        </div>
+    </div>
+
+    <div class="History">
+        <p>
+            Won : 0, Lost : 0, Tie : 0 
+        </p>
+    </div>
+
+    <button class="Reset" onclick="resetButton()">
+        Reset Game
     </button>
     
 </body>
 <script>
-    let nums = {
-            Won : 0,
-            Lost : 0,
-            Tie : 0
-        }
 
     function computerMove() {
-        const value = Math.random()
-        cMove = ''
-
+        const value= Math.random()
+        let compMove = ''
         if (value >= 0 && value < 1/3) {
-            cMove = 'Rock'
+            compMove = 'Rock'
         } else if (value >= 1/3 && value < 2/3) {
-            cMove = 'Paper'
+            compMove = 'Paper'
         } else {
-            cMove = 'Scissor'
+            compMove = 'Scissor'
         }
-
-        return cMove
+        return compMove
     }
 
-    function gameResult(playerMove) {
-        let cMove = computerMove()
-        result= ''
-
-        if (playerMove === 'Rock') {
+    function wonOrLose(x) {
+        let cMove= computerMove()
+        if (x === 'Rock') {
             if (cMove === 'Rock') {
-                result = 'Tie';
-                nums.Tie ++;
+                nums.Ties += 1
+                document.querySelector('.result-text').innerHTML = 'Tie!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="rock-emoji.png" alt="">
+                <img class="computer-choice" src="rock-emoji.png" alt="">
+                Computer
+                `
             } else if (cMove === 'Paper') {
-                result = 'Computer Won';
-                nums.Lost ++;
+                nums.Losses += 1
+                document.querySelector('.result-text').innerHTML = 'You Lost!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="rock-emoji.png" alt="">
+                <img class="computer-choice" src="paper-emoji.png" alt="">
+                Computer
+                `
             } else {
-                result = 'You Won';
-                nums.Won ++;
+                nums.Wins += 1
+                document.querySelector('.result-text').innerHTML = 'You Won!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="rock-emoji.png" alt="">
+                <img class="computer-choice" src="scissors-emoji.png" alt="">
+                Computer
+                `
             }
-        } else if (playerMove === 'Paper') {
+        } else if (x === 'Paper') {
             if (cMove === 'Rock') {
-                result = 'You Won';
-                nums.Won ++;
+                nums.Wins += 1
+                document.querySelector('.result-text').innerHTML = 'You Won!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="paper-emoji.png" alt="">
+                <img class="computer-choice" src="rock-emoji.png" alt="">
+                Computer
+                `
             } else if (cMove === 'Paper') {
-                result = 'Tie';
-                nums.Tie ++;
+                nums.Ties += 1
+                document.querySelector('.result-text').innerHTML = 'Tie!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="paper-emoji.png" alt="">
+                <img class="computer-choice" src="paper-emoji.png" alt="">
+                Computer
+                `
             } else {
-                result = 'Computer Won';
-                nums.Lost ++;
+                nums.Losses += 1
+                document.querySelector('.result-text').innerHTML = 'You Lost!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="paper-emoji.png" alt="">
+                <img class="computer-choice" src="scissors-emoji.png" alt="">
+                Computer
+                `
             }
         } else {
             if (cMove === 'Rock') {
-                result = 'Computer Won';
-                nums.Lost ++;
+                nums.Losses += 1
+                document.querySelector('.result-text').innerHTML = 'You Lost!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="scissors-emoji.png" alt="">
+                <img class="computer-choice" src="rock-emoji.png" alt="">
+                Computer
+                `
             } else if (cMove === 'Paper') {
-                result = 'You Won';
-                nums.Won ++;
+                nums.Wins += 1
+                document.querySelector('.result-text').innerHTML = 'You Won!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="scissors-emoji.png" alt="">
+                <img class="computer-choice" src="paper-emoji.png" alt="">
+                Computer
+                `
             } else {
-                result = 'Tie';
-                nums.Tie ++;
+                nums.Ties += 1
+                document.querySelector('.result-text').innerHTML = 'Tie!'
+                document.querySelector('.choices').innerHTML = `
+                You
+                <img class="user-choice" src="scissors-emoji.png" alt="">
+                <img class="computer-choice" src="scissors-emoji.png" alt="">
+                Computer
+                `
             }
         }
-
-        alert(`The Computer chose ${cMove} and You chose ${playerMove}, the result is ${result}!
-        Won : ${nums.Won}, Lost : ${nums.Lost}, Tie : ${nums.Tie}`)
-        
+        return history()
     }
+
+    let nums = {
+        Wins : 0,
+        Losses : 0,
+        Ties : 0
+    }
+
+    function history() {
+        document.querySelector('.History').innerHTML = `Won : ${nums.Wins}, Lost : ${nums.Losses}, Tie : ${nums.Ties}`
+    }
+
+    function resetButton() {
+        nums.Wins = 0
+        nums.Losses = 0
+        nums.Ties = 0
+        history()
+        document.querySelector('.result-text').innerHTML = ''
+        document.querySelector('.choices').innerHTML = ''
+    }
+
 </script>
 </html>
